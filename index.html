@@ -11,21 +11,11 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --matcha-green: #87a96b;
-            --light-matcha: #c8d5b9;
-            --strawberry-pink: #f4a5a5;
-            --soft-pink: #f8d7da;
-            --cream: #faf8f5;
-            --ocean-blue: #4a90e2;
-            --soft-gray: #6c757d;
-        }
-
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, var(--cream) 0%, var(--light-matcha) 100%);
+            background: linear-gradient(135deg, #faf8f5 0%, #c8d5b9 100%);
             min-height: 100vh;
         }
 
@@ -50,27 +40,28 @@
 
         nav a {
             text-decoration: none;
-            color: var(--matcha-green);
+            color: #87a96b;
             font-weight: 600;
             padding: 0.5rem 1rem;
             border-radius: 25px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         nav a:hover, nav a.active {
-            background: var(--matcha-green);
+            background: #87a96b;
             color: white;
             transform: translateY(-2px);
         }
 
         /* Sections */
-        section {
+        .section {
             min-height: 100vh;
             padding: 100px 20px 50px;
             display: none;
         }
 
-        section.active {
+        .section.active {
             display: block;
         }
 
@@ -85,7 +76,11 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, var(--light-matcha) 0%, var(--soft-pink) 100%);
+            background: linear-gradient(135deg, #c8d5b9 0%, #f8d7da 100%);
+        }
+
+        #home.active {
+            display: flex;
         }
 
         .hero-content {
@@ -101,34 +96,28 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--matcha-green), var(--strawberry-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            object-fit: cover;
             margin: 0 auto 2rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            font-size: 3rem;
-            color: white;
+            border: 5px solid #f4a5a5;
+            display: block;
         }
 
         .hero-content h1 {
             font-size: 3rem;
-            color: var(--matcha-green);
+            color: #87a96b;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--matcha-green), var(--ocean-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .hero-content p {
             font-size: 1.3rem;
-            color: var(--soft-gray);
-            margin-bottom: 2rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
         }
 
         /* About Section */
         #about {
-            background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+            background: linear-gradient(135deg, #faf8f5 0%, white 100%);
         }
 
         .about-content {
@@ -141,7 +130,7 @@
         }
 
         .about-content h3 {
-            color: var(--matcha-green);
+            color: #87a96b;
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
@@ -159,7 +148,7 @@
         }
 
         .interest-tag {
-            background: linear-gradient(45deg, var(--matcha-green), var(--strawberry-pink));
+            background: linear-gradient(45deg, #87a96b, #f4a5a5);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 25px;
@@ -167,12 +156,32 @@
             font-weight: 600;
         }
 
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-photo:hover {
+            transform: scale(1.05);
+        }
+
         .experience-item {
             background: rgba(244, 165, 165, 0.1);
             padding: 1.5rem;
             border-radius: 15px;
             margin: 1.5rem 0;
-            border-left: 4px solid var(--strawberry-pink);
+            border-left: 4px solid #f4a5a5;
         }
 
         .contact-links {
@@ -183,7 +192,7 @@
         }
 
         .contact-link {
-            background: var(--matcha-green);
+            background: #87a96b;
             color: white;
             padding: 0.8rem 1.5rem;
             border-radius: 25px;
@@ -193,7 +202,7 @@
         }
 
         .contact-link:hover {
-            background: var(--strawberry-pink);
+            background: #f4a5a5;
             transform: translateY(-3px);
         }
 
@@ -201,85 +210,30 @@
             font-size: 2.5rem;
             text-align: center;
             margin-bottom: 3rem;
-            color: var(--matcha-green);
-        }
-
-        /* Floating animations */
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .floating-elements::before,
-        .floating-elements::after {
-            content: '🌊';
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-elements::before {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-elements::after {
-            content: '🐱';
-            top: 60%;
-            right: 15%;
-            animation-delay: 3s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-            }
+            color: #87a96b;
         }
     </style>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#" onclick="showHome()" class="nav-link active">Home</a></li>
+            <li><a href="#" onclick="showAbout()" class="nav-link">About</a></li>
         </ul>
     </nav>
 
-    <section id="home" class="active">
-        <div class="floating-elements"></div>
+    <div id="home" class="section active">
         <div class="container">
             <div class="hero-content">
-                <div class="profile-photo">A</div>
+                <img src="profile.jpeg" alt="Ailira" class="profile-photo">
                 <h1>Ailira</h1>
                 <p>Passionate about cognitive science, psychology, and the beautiful intersections of mind and nature.</p>
                 <p>🌊 Ocean lover • 🐱 Cat enthusiast • 🍵 Matcha addict</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="about">
-        <div class="floating-elements"></div>
+    <div id="about" class="section">
         <div class="container">
             <h2>About Me</h2>
             <div class="about-content">
@@ -301,8 +255,8 @@
 
                 <h3>My Experience</h3>
                 <div class="experience-item">
-                    <h4 style="color: var(--matcha-green); margin-bottom: 0.5rem;">Education & Research</h4>
-                    <p style="color: var(--strawberry-pink); font-weight: 600; margin-bottom: 0.5rem;">Current Studies in Cognitive Science & Psychology</p>
+                    <h4 style="color: #87a96b; margin-bottom: 0.5rem;">Education & Research</h4>
+                    <p style="color: #f4a5a5; font-weight: 600; margin-bottom: 0.5rem;">Current Studies in Cognitive Science & Psychology</p>
                     <p>Exploring the intersection of mind, behavior, and human experience through interdisciplinary research and academic study. Focusing on how cognitive processes shape our understanding of the world around us.</p>
                 </div>
 
@@ -325,46 +279,26 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <script>
-        // Navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section');
+        function showHome() {
+            document.getElementById('home').classList.add('active');
+            document.getElementById('about').classList.remove('active');
+            
+            // Update nav
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.nav-link')[0].classList.add('active');
+        }
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Remove active class from all links
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    // Add active class to clicked link
-                    this.classList.add('active');
-                    
-                    // Hide all sections
-                    sections.forEach(section => section.classList.remove('active'));
-                    
-                    // Show target section
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        targetSection.classList.add('active');
-                    }
-                });
-            });
-
-            // Contact links hover effects
-            const contactLinks = document.querySelectorAll('.contact-link');
-            contactLinks.forEach(link => {
-                link.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px) scale(1.05)';
-                });
-                link.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-        });
+        function showAbout() {
+            document.getElementById('home').classList.remove('active');
+            document.getElementById('about').classList.add('active');
+            
+            // Update nav
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.nav-link')[1].classList.add('active');
+        }
     </script>
 </body>
 </html>
