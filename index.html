@@ -1,58 +1,303 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ailira Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ailira - Portfolio</title>
     <style>
-        body { font-family: Arial; background: linear-gradient(135deg, #faf8f5, #c8d5b9); margin: 0; padding: 20px; }
-        .nav { text-align: center; padding: 20px; background: white; margin-bottom: 20px; }
-        .nav button { padding: 10px 20px; margin: 0 10px; background: #87a96b; color: white; border: none; border-radius: 20px; cursor: pointer; }
-        .nav button:hover { background: #f4a5a5; }
-        .section { display: none; max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; }
-        .section.active { display: block; }
-        .profile-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 20px; }
-        .gallery img { width: 150px; height: 150px; object-fit: cover; margin: 10px; border-radius: 10px; }
-        h1 { text-align: center; color: #87a96b; }
-        h2 { color: #87a96b; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #faf8f5 0%, #c8d5b9 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #87a96b;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            background: #87a96b;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 100px 20px 50px;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Home Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #c8d5b9 0%, #f8d7da 100%);
+        }
+
+        #home.active {
+            display: flex;
+        }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid #f4a5a5;
+            display: block;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            color: #87a96b;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(135deg, #faf8f5 0%, white 100%);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-content h3 {
+            color: #87a96b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .interest-tag {
+            background: linear-gradient(45deg, #87a96b, #f4a5a5);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .experience-item {
+            background: rgba(244, 165, 165, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #f4a5a5;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            background: #87a96b;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .contact-link:hover {
+            background: #f4a5a5;
+            transform: translateY(-3px);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #87a96b;
+        }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <button onclick="showHome()">Home</button>
-        <button onclick="showAbout()">About</button>
-    </div>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showHome()" class="nav-link active">Home</a></li>
+            <li><a href="#" onclick="showAbout()" class="nav-link">About</a></li>
+        </ul>
+    </nav>
 
     <div id="home" class="section active">
-        <h1>Ailira</h1>
-        <img src="profile.jpeg" class="profile-photo">
-        <p style="text-align: center;">Passionate about cognitive science, psychology, and nature.</p>
-        <p style="text-align: center;">🌊 Ocean lover • 🐱 Cat enthusiast • 🍵 Matcha addict</p>
+        <div class="container">
+            <div class="hero-content">
+                <img src="profile.jpeg" alt="Ailira" class="profile-photo">
+                <h1>Ailira</h1>
+                <p>Passionate about cognitive science, psychology, and the beautiful intersections of mind and nature.</p>
+                <p>🌊 Ocean lover • 🐱 Cat enthusiast • 🍵 Matcha addict</p>
+            </div>
+        </div>
     </div>
 
     <div id="about" class="section">
-        <h2>About Me</h2>
-        <p>I'm passionate about understanding the human mind and behavior through cognitive science and psychology.</p>
-        
-        <h3>My Photos</h3>
-        <div class="gallery">
-            <img src="beach.jpeg">
-            <img src="cat1.jpeg">
-            <img src="sunset.jpeg">
-            <img src="nature.jpeg">
-            <img src="cat2.jpeg">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <h3>Hello! I'm Ailira</h3>
+                <p>I'm passionate about understanding the human mind and behavior through the lens of cognitive science and psychology. My journey combines academic curiosity with a love for the beauty found in nature, especially the ocean, and the companionship of cats.</p>
+                
+                <p>When I'm not diving deep into research or studies, you can find me by the water, enjoying a cup of matcha, or spending time with furry friends. I believe in finding balance between intellectual pursuits and the simple joys in life.</p>
+                
+                <p>My interests span across interdisciplinary fields, connecting psychology with humanities to better understand human experience and behavior in all its complexity.</p>
+
+                <div class="interests">
+                    <span class="interest-tag">Cognitive Science</span>
+                    <span class="interest-tag">Psychology</span>
+                    <span class="interest-tag">Humanities</span>
+                    <span class="interest-tag">Ocean Lover</span>
+                    <span class="interest-tag">Cat Enthusiast</span>
+                    <span class="interest-tag">Matcha Addict</span>
+                </div>
+
+                <h3>My Experience</h3>
+                <div class="experience-item">
+                    <h4 style="color: #87a96b; margin-bottom: 0.5rem;">Education & Research</h4>
+                    <p style="color: #f4a5a5; font-weight: 600; margin-bottom: 0.5rem;">Current Studies in Cognitive Science & Psychology</p>
+                    <p>Exploring the intersection of mind, behavior, and human experience through interdisciplinary research and academic study. Focusing on how cognitive processes shape our understanding of the world around us.</p>
+                </div>
+
+                <h3>My Gallery</h3>
+                <p>Here are some moments that bring me joy - from peaceful ocean scenes to adorable feline friends!</p>
+                <div class="photo-gallery">
+                    <img src="beach.jpeg" alt="Beach scene" class="gallery-photo">
+                    <img src="cat1.jpeg" alt="Adorable cat" class="gallery-photo">
+                    <img src="sunset.jpeg" alt="Beautiful sunset" class="gallery-photo">
+                    <img src="nature.jpeg" alt="Nature scene" class="gallery-photo">
+                    <img src="cat2.jpeg" alt="Cute kitten" class="gallery-photo">
+                </div>
+
+                <h3>Contact Me</h3>
+                <p>I'd love to connect and discuss cognitive science, psychology, or just chat about cats and matcha!</p>
+                <div class="contact-links">
+                    <a href="mailto:ailira@example.com" class="contact-link">📧 Email Me</a>
+                    <a href="#" class="contact-link">💼 LinkedIn</a>
+                    <a href="#" class="contact-link">🐱 Instagram</a>
+                </div>
+            </div>
         </div>
-        
-        <h3>Contact</h3>
-        <p>Email: ailira@example.com</p>
     </div>
 
     <script>
         function showHome() {
-            document.getElementById('home').style.display = 'block';
-            document.getElementById('about').style.display = 'none';
+            document.getElementById('home').classList.add('active');
+            document.getElementById('about').classList.remove('active');
+            
+            // Update nav
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.nav-link')[0].classList.add('active');
         }
+
         function showAbout() {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('about').style.display = 'block';
+            document.getElementById('home').classList.remove('active');
+            document.getElementById('about').classList.add('active');
+            
+            // Update nav
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.nav-link')[1].classList.add('active');
         }
     </script>
 </body>
